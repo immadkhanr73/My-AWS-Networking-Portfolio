@@ -11,4 +11,4 @@ Welcome to my portfolio! Here, I document my hands-on experience building, secur
 
 * **[Project 2: Secure AWS Account Setup](./02-AWS-Account-Setup/)**
   * *Description:* Establishing a secure AWS account baseline, enabling billing alerts, and securing the root user with MFA.
-  * *Deliverable:* [AWS Account Setup PDF](./02-AWS-Account-Setup/AWS-Account-Setup.pdf)
+  * *Deliverable:* [AWS Account Setup PDF](./02-AWS-Account-Setup/AWS%20Account%20Setup.pdf)
