@@ -1,40 +1,120 @@
 <img src="https://cdn.prod.website-files.com/677c400686e724409a5a7409/6790ad949cf622dc8dcd9fe4_nextwork-logo-leather.svg" alt="NextWork" width="300" />
 
-# Get Hands on with Cloud Networking!
+# Set Up An AWS Account
 
-**Project Link:** [View Project](http://nextwork.ai/projects/aws-networks-intro)
+**Project Link:** [View Project](http://nextwork.ai/projects/aws-account-setup)
 
 **Author:** Immad Khan  
 **Email:** immadkhanr73@gmail.com
 
 ---
 
-## I'm starting the AWS Networking Series!
-
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-intro_ba6d42ae)
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-account-setup_r6s1t7u3)
 
 ---
 
-## I'm building a cloud networking architecture
+## Introducing Today's Project!
 
-As a networking enthusiast, I recognize that the future of IT infrastructure lies in the cloud. I am learning cloud networking to align my skills with current global industry demands, with the ultimate goal of launching my career as a Cloud Network Engineer.
+We are setting up an AWS account
 
-Cloud networking is the practice of building, managing, and securing a computer network using software and services hosted on the internet rather than relying on physical, on-premises hardware. Instead of purchasing routers, pulling cables, and configuring physical firewalls in a local data center, we rent a highly advanced, invisible infrastructure from providers like AWS or Azure. As a Cloud Network Engineer, we use web dashboards and code to instantly deploy Virtual Private Clouds (VPCs), subnets, load balancers, and virtual firewalls. Ultimately, it takes the foundational rules of traditional networking like IP addressing, routing, DNS and allows you to scale them globally in seconds using software and automation.
+### Key tools and concepts
 
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-intro_a1b2c3d4)
+Create an AWS account with root user credentials.
+
+Enable billing alerts to prevent surprise charges.
+
+Verify your identity.
+
+Add multi-factor authentication to secure your root account.
+
+### Challenges and wins
+
+This project took me approximately 15 minutes because I spent a bit of extra time setting up and testing my authenticator app for MFA.
 
 ---
 
-## Excited to share my progress - build a VPC with me!
+## Creating My AWS Account
 
-My primary goal for this AWS networking series is to transform guided labs into a professional I will set aside every week to work on this networking series. By completing these projects, I will build out my GitHub with concrete examples of VPC architecture, subnetting, and routing to prove my hands-on infrastructure skills to global startups.
+We will be sign up AWS using our email address and enter a strong password for account creation.
 
-### What are networks?
+### Understanding the root user
 
-Network is a group of two or more connected devices like computers, servers, or smartphones that communicate with each other to share data, resources, and services. These devices are linked together using physical pathways or wireless signals.
+When you first sign up for an AWS account, the credentials (email and password) you enter during registration create the root user identity.
 
-### What is a VPC?
+Think of the root user as the master key to a physical building. It has absolute, unrestricted administrative power to access every single service, resource, and billing setting within that account. Every AWS account has exactly one root user associated with it.
 
-A Virtual Private Cloud (VPC) is a secure, logically isolated private network hosted within a public cloud environment that serves as the primary building block for cloud infrastructure. It functions similarly to a traditional physical data center but operates entirely virtually.
+Prevent Unwanted Costs and Theft: If a malicious actor gains access to your root credentials, they can delete your entire setup, steal sensitive databases, or run up thousands of dollars in server costs (such as launching massive crypto-mining servers) on your linked credit card.
+
+Unrestrictable Access: Unlike regular IAM users (whose permissions can be limited and customized), you cannot restrict the permissions of the root user. It always has full access to everything.
+
+---
+
+## Setting Up Billing and Payment
+
+In this step, we will choose account plan, enter contact information and a payment method.
+
+### Why AWS requires a payment method
+
+AWS asks for your payment method for two main reasons:
+
+1) They want to make sure you’re a real person (not a bot trying to get free cloud resources).
+
+2) If you choose to go past your Free Tier limits, they need a way to charge for that extra usage.
+
+---
+
+## Completing Account Activation
+
+You have added your payment method. Now you need to verify your identity and select a support plan to activate your account.
+
+### Identity verification and support plan
+
+I verified my identity by:
+
+Select your Country code from the dropdown.
+Enter your mobile phone number.
+Click Send SMS.
+
+The Basic plan is free and includes access to AWS documentation, forums, and AWS Trusted Advisor checks. It is more than enough for learning and personal projects.
+
+---
+
+## Enabling Free Tier Alerts
+
+Log in to the AWS Console.
+
+Navigate to Billing Preferences.
+
+Enable Free Tier usage alerts
+
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-account-setup_j6k1l7m3)
+
+### Why usage alerts matter
+
+AWS will send you an email when your usage reaches 85% of a Free Tier limit. This gives you time to stop or adjust your usage before any charges apply. It is one of the simplest ways to protect yourself from surprise bills.
+
+---
+
+## Securing the Account with MFA
+
+AWS shares a secret key with you via a QR code.
+
+Your authenticator app scans it and combines this key with the current time using a protocol called TOTP.
+
+This generates a unique 6-digit code that changes every 30 seconds. Since AWS has the same key and time, it matches your code to verify it's you.
+
+How to Enable MFA:
+
+1) Log into AWS, open the IAM Dashboard, and click Add MFA.
+
+2) Choose Virtual MFA device as your device type.
+
+3) Scan the displayed QR code with your phone's app.
+
+4) Enter two consecutive 6-digit codes to sync the clocks, then click Register MFA.
+
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-account-setup_e3f7g2h8)
+
+---
 
 ---
