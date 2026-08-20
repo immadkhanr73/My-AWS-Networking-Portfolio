@@ -12,3 +12,7 @@ Welcome to my portfolio! Here, I document my hands-on experience building, secur
 * **[Project 2: Secure AWS Account Setup](./02-AWS-Account-Setup/)**
   * *Description:* Establishing a secure AWS account baseline, enabling billing alerts, and securing the root user with MFA.
   * *Deliverable:* [AWS Account Setup PDF](./02-AWS-Account-Setup/AWS%20Account%20Setup.pdf)
+
+* **[Project 3: Virtual Private Cloud](./03-Build-a-Virtual-Private-Cloud/)**
+  * *Description:* Designing and deploying a custom Amazon VPC from scratch, partitioning public subnets with custom CIDR blocks, and attaching an Internet Gateway to establish external network ingress/egress pathways.
+  * *Deliverable:* [Build a Virtual Private Cloud PDF](./03-Build-VPC/Build%20a%20Virtual%20Private%20Cloud.pdf)
