@@ -2,7 +2,7 @@
 
 # VPC Traffic Flow and Security
 
-**Project Link:** [View Project](http://nextwork.ai/projects/aws-vpc-traffic-flow-security)
+**Project Link:** [View Project](http://nextwork.ai/projects/aws-networks-security)
 
 **Author:** Immad Khan  
 **Email:** immadkhanr73@gmail.com
@@ -11,123 +11,99 @@
 
 ## VPC Traffic Flow and Security
 
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-vpc-traffic-flow-security_placeholder)
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_92b0b0b4)
 
 ---
 
 ## Introducing Today's Project!
 
-I am here to master VPC traffic flow and implement comprehensive security controls within my AWS networking infrastructure. I will configure route tables, security groups, network ACLs, and design traffic patterns to ensure secure communication between resources.
+### What is Amazon VPC?
 
-### Key tools and concepts
+An Amazon VPC is a secure, isolated virtual network on AWS. It is useful because it gives you complete control over your network environment, including IP ranges, subnets, route tables, and gateways, keeping your cloud resources safe.
 
-Understanding traffic flow in VPCs through route tables.
+### How I used Amazon VPC in this project
 
-Implementing security groups for stateful firewall rules.
+I used VPC to manage traffic flow and security. I mapped route tables to direct public subnet traffic, configured security groups for instance firewalls, and built custom Network ACLs for stateless subnet-level packet filtering.
 
-Configuring network access control lists (NACLs) for stateless filtering.
+### One thing I didn't expect in this project was...
 
-Designing secure communication patterns between subnets.
+I didn't expect the contrast between stateful security groups and stateless Network ACLs. Managing security at both the instance and subnet levels gave me a true understanding of multi-layered cloud defense.
 
-Implementing VPC flow logs for traffic monitoring.
+### This project took me...
 
-### Challenges and wins
-
----
-
-## Route Tables and Traffic Flow
-
-### What I did in this step
-
-I configured route tables to control how network traffic is directed within and out of my VPC. I am doing this to ensure that traffic flows through the correct network paths and reaches its intended destination securely.
-
-### Understanding route tables
-
-A route table is a set of rules (called routes) that determines where network traffic from your subnet or gateway is directed. Each route specifies a destination and a target.
-
-Route tables act as traffic directors, guiding packets to their proper destinations within the VPC and to the internet or other networks.
-
-Every subnet in a VPC must be associated with a route table, which controls the outgoing traffic for instances in that subnet.
-
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-vpc-traffic-flow-security_routes)
-
-### Default route table behavior
-
-AWS automatically creates a default route table for every VPC that allows communication between all subnets within the VPC (local routes).
+This project took me approximately 2.5 hours. This time was spent carefully designing custom routing rules, implementing stateful security groups alongside stateless Network ACLs, and deploying global network assets using the AWS CLI.
 
 ---
 
-## Security Groups
+## Route tables
 
-### What I did in this step
+Route tables are sets of rules, called routes, that determine where network traffic from subnets or gateways is directed. They act as a network directory or GPS to ensure data packets reach their intended destinations.
 
-I created and configured security groups to control inbound and outbound traffic to EC2 instances and other AWS resources. I am doing this to implement the principle of least privilege and ensure only authorized traffic reaches my resources.
+A subnet needs a route table with a route directing internet-bound traffic (0.0.0.0/0) to an Internet Gateway. Without this route, resources in the subnet cannot send or receive traffic outside the private VPC network.
 
-### How security groups work
-
-A security group acts as a virtual firewall that controls the traffic allowed to and from AWS resources. Security groups are stateful, meaning if you allow inbound traffic, the corresponding outbound traffic is automatically allowed.
-
-Security groups operate at the instance level, providing fine-grained control over which protocols, ports, and sources/destinations are permitted.
-
-You can attach multiple security groups to a single resource, and each group's rules are combined.
-
-### Inbound vs outbound rules
-
-Inbound rules control traffic coming into a resource. Outbound rules control traffic leaving a resource.
-
-By default, security groups deny all inbound traffic and allow all outbound traffic, implementing a secure-by-default approach.
-
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-vpc-traffic-flow-security_sg)
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_0a07b191)
 
 ---
 
-## Network Access Control Lists (NACLs)
+## Route destination and target
 
-### What I did in this step
+Destination is the IP address range (CIDR block) that the traffic is trying to reach. Target is the gateway, network interface, or connection through which that traffic must pass to reach its destination.
 
-I configured Network ACLs to provide an additional layer of security at the subnet level. I am doing this to implement stateless packet filtering and add defense-in-depth to my network architecture.
+The new route has a destination of 0.0.0.0/0 (representing all IPv4 internet traffic) and a target of my Internet Gateway (NextWork IG, igw-0bf3d476198229860), directing external traffic out to the public internet.
 
-### Understanding NACLs
-
-Network ACLs (Access Control Lists) are stateless firewalls that operate at the subnet level, controlling traffic entering and leaving the subnet.
-
-Unlike security groups, NACLs are stateless, meaning you must explicitly allow both inbound and outbound traffic.
-
-NACLs process rules in order, from lowest to highest rule number, until a match is found.
-
-### Stateless vs stateful filtering
-
-Security groups (stateful): If inbound traffic is allowed, response traffic is automatically allowed.
-
-NACLs (stateless): Both inbound and outbound rules must be explicitly configured.
-
-This dual-layer approach provides comprehensive traffic control and adds an extra security boundary.
-
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-vpc-traffic-flow-security_nacl)
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_0a07b191)
 
 ---
 
-## VPC Flow Logs
+## Security groups
 
-### What I did in this step
+Security groups are resource-level, stateful virtual firewalls in AWS. They regulate traffic flow to and from specific resources, like EC2 instances, by evaluating custom inbound and outbound security rules.
 
-I enabled VPC Flow Logs to capture and analyze traffic patterns within my VPC. I am doing this to monitor network activity, troubleshoot connectivity issues, and detect suspicious traffic patterns.
+### Inbound vs Outbound rules
 
-### Monitoring with VPC Flow Logs
+Inbound rules control traffic allowed to enter associated resources. For this security group, I configured an inbound rule allowing HTTP traffic on port 80 from Anywhere-IPv4 (0.0.0.0/0) to let public users access my web server.
 
-VPC Flow Logs capture metadata about IP traffic flowing in and out of network interfaces in your VPC. Logs can be published to CloudWatch Logs or S3.
+Outbound rules determine what traffic can leave your AWS resources. For this project, we kept the default security group configuration, which automatically allows all outbound traffic (0.0.0.0/0) on all ports to the public internet.
 
-Flow logs provide visibility into network behavior, helping identify misconfigured security policies and potential security threats.
 
-Each log entry includes the source IP, destination IP, ports, protocol, number of packets, and number of bytes.
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_92b0b0b4)
 
-### Analyzing traffic patterns
+---
 
-With Flow Logs, you can identify which resources communicate with each other, detect unusual traffic patterns, and troubleshoot connectivity issues.
+## Network ACLs
 
-Integration with CloudWatch and other AWS services enables real-time alerting and automated responses to security events.
+A Network ACL (NACL) is a stateless virtual firewall at the subnet level that regulates inbound and outbound traffic. It evaluates traffic sequentially using numbered rules to decide whether to allow or deny data packets entering the subnet.
 
-![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-vpc-traffic-flow-security_flowlogs)
+### Security groups vs. network ACLs
+
+Security groups act as stateful firewalls at the resource level (e.g., EC2), while Network ACLs act as stateless firewalls at the subnet boundary. Security groups support allow rules only, whereas NACLs support both allow and deny rules.
+
+---
+
+## Default vs Custom Network ACLs
+
+### Similar to security groups, network ACLs use inbound and outbound rules
+
+A default Network ACL automatically permits all inbound and outbound traffic to and from the subnet (using Rule 100 for 0.0.0.0/0). This differs from custom NACLs, which automatically start by denying all traffic.
+
+
+A custom Network ACL starts with a strict 'Default Deny' posture, blocking all inbound and outbound traffic. We must manually create rules (such as Rule 100 for All Traffic 0.0.0.0/0) to define what is explicitly permitted.
+
+
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_4faeb056)
+
+---
+
+## Tracking VPC Resources
+
+Using the AWS CLI, I programmatically deployed three key resources in my secondary region: an Amazon VPC, a public subnet, and an Internet Gateway, creating a multi-region network baseline.
+
+EC2 Global View provides a unified dashboard to monitor resources across all AWS regions. You can find and track VPCs, subnets, security groups, Internet Gateways, EC2 instances, volumes, and network interfaces globally.
+
+I would use EC2 Global View again when auditing resources across multiple regions to prevent cost leaks from orphaned VPCs, subnets, or instances. It is highly valuable for fast disaster recovery planning and security compliance reviews.
+
+
+![Image](http://nextwork.ai/authentic_red_gentle_walrus/uploads/aws-networks-security_b03ea6162)
 
 ---
 
